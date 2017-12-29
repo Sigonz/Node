@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 var app = express();
 app.set('view engine','hbs');
 app.use(express.static(__dirname + '/public'));
+
 app.use((req,res,next)=>{
     var now = new Date().toString();
     var log=`${now} ${req.method} ${req.url}`;
@@ -41,6 +42,12 @@ app.get('/about', (req, res) => {
     pageTitle: 'About Page',
   });
 });
+
+app.get('/projects',(req,res)=>{
+    res.render('projects.hbs',{
+        pageTitle : 'Projects Page',
+    });
+})
 
 // /bad - send back json with errorMessage
 app.get('/bad', (req, res) => {
